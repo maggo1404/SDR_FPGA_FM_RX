@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" modified="2022-12-23T17:34:57.726Z" agent="5.0 (Windows)" version="20.7.4" etag="INQdtCihvGVETyZktvPN" type="github">
+  <diagram id="EpRkGcn2VvPMiI3gXDte" name="Seite-1">
+    <mxGraphModel dx="1191" dy="1141" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="PLLDQjbsd6cbt4TKye9B-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="PLLDQjbsd6cbt4TKye9B-1" target="PLLDQjbsd6cbt4TKye9B-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PLLDQjbsd6cbt4TKye9B-1" value="DDS" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PLLDQjbsd6cbt4TKye9B-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="PLLDQjbsd6cbt4TKye9B-2" target="PLLDQjbsd6cbt4TKye9B-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PLLDQjbsd6cbt4TKye9B-2" value="Daten vom SDR" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PLLDQjbsd6cbt4TKye9B-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="PLLDQjbsd6cbt4TKye9B-3" target="PLLDQjbsd6cbt4TKye9B-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PLLDQjbsd6cbt4TKye9B-3" value="Mischer" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="220" y="140" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PLLDQjbsd6cbt4TKye9B-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="PLLDQjbsd6cbt4TKye9B-6" target="PLLDQjbsd6cbt4TKye9B-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PLLDQjbsd6cbt4TKye9B-6" value="Tiefpass" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PLLDQjbsd6cbt4TKye9B-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="PLLDQjbsd6cbt4TKye9B-8" target="PLLDQjbsd6cbt4TKye9B-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PLLDQjbsd6cbt4TKye9B-8" value="Sampelrate-Reduziern" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="525" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PLLDQjbsd6cbt4TKye9B-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="PLLDQjbsd6cbt4TKye9B-10" target="PLLDQjbsd6cbt4TKye9B-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PLLDQjbsd6cbt4TKye9B-10" value="FM-Demodulator" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="690" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PLLDQjbsd6cbt4TKye9B-12" value="DA" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="860" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
