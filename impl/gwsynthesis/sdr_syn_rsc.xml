@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module name="SDR_Main" Alu="8" Lut="19" Dsp="2">
+    <SubModule name="dds_synth" Register="58" Alu="35" Lut="31" Bsram="1"/>
+    <SubModule name="dds_synth_nf" Register="59" Alu="37" Lut="27" Bsram="1"/>
+    <SubModule name="dds_synth_hf" Register="59" Alu="37" Lut="30" Bsram="1"/>
+    <SubModule name="dds_synth_hf90" Register="59" Alu="37" Lut="32" Bsram="1"/>
+    <SubModule name="filter_i" Register="292" Alu="8" Lut="341" Dsp="1" Bsram="1"/>
+    <SubModule name="filter_q" Register="8" Lut="107" Dsp="1"/>
+    <SubModule name="downsampler_i" Register="15" Alu="6" Lut="5"/>
+    <SubModule name="downsampler_q" Register="15" Alu="6" Lut="5"/>
+    <SubModule name="FMdemod" Dsp="2"/>
+</Module>

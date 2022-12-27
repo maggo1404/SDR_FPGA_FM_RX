@@ -1,0 +1,84 @@
+[
+ {
+  "InstFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/main.vhd",
+  "InstLine" : 27,
+  "InstName" : "SDR_Main",
+  "ModuleFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/main.vhd",
+  "ModuleLine" : 27,
+  "ModuleName" : "SDR_Main",
+  "SubInsts" : [
+   {
+    "InstFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/main.vhd",
+    "InstLine" : 76,
+    "InstName" : "dds_synth",
+    "ModuleFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/dds_synthesizer.vhd",
+    "ModuleLine" : 52,
+    "ModuleName" : "dds_synthesizer"
+   },
+   {
+    "InstFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/main.vhd",
+    "InstLine" : 87,
+    "InstName" : "dds_synth_nf",
+    "ModuleFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/dds_synthesizer.vhd",
+    "ModuleLine" : 52,
+    "ModuleName" : "dds_synthesizer"
+   },
+   {
+    "InstFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/main.vhd",
+    "InstLine" : 98,
+    "InstName" : "dds_synth_hf",
+    "ModuleFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/dds_synthesizer.vhd",
+    "ModuleLine" : 52,
+    "ModuleName" : "dds_synthesizer"
+   },
+   {
+    "InstFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/main.vhd",
+    "InstLine" : 109,
+    "InstName" : "dds_synth_hf90",
+    "ModuleFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/dds_synthesizer.vhd",
+    "ModuleLine" : 52,
+    "ModuleName" : "dds_synthesizer"
+   },
+   {
+    "InstFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/main.vhd",
+    "InstLine" : 121,
+    "InstName" : "filter_i",
+    "ModuleFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/firfilter.vhd",
+    "ModuleLine" : 29,
+    "ModuleName" : "FIR_filter"
+   },
+   {
+    "InstFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/main.vhd",
+    "InstLine" : 129,
+    "InstName" : "filter_q",
+    "ModuleFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/firfilter.vhd",
+    "ModuleLine" : 29,
+    "ModuleName" : "FIR_filter"
+   },
+   {
+    "InstFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/main.vhd",
+    "InstLine" : 137,
+    "InstName" : "downsampler_i",
+    "ModuleFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/downsampler.vhd",
+    "ModuleLine" : 28,
+    "ModuleName" : "downsampler"
+   },
+   {
+    "InstFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/main.vhd",
+    "InstLine" : 146,
+    "InstName" : "downsampler_q",
+    "ModuleFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/downsampler.vhd",
+    "ModuleLine" : 28,
+    "ModuleName" : "downsampler"
+   },
+   {
+    "InstFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/main.vhd",
+    "InstLine" : 155,
+    "InstName" : "FMdemod",
+    "ModuleFile" : "C:/Users/marco/Documents/fpga_project/sdr/src/fm_demodulator.vhd",
+    "ModuleLine" : 29,
+    "ModuleName" : "FM_demod"
+   }
+  ]
+ }
+]

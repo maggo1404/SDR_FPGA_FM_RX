@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gowin-synthesis-project>
+<Project>
+    <Version>beta</Version>
+    <Device id="GW1NR-9C" package="QFN88P" speed="6" partNumber="GW1NR-LV9QN88PC6/I5"/>
+    <FileList>
+        <File path="C:\Users\marco\Documents\fpga_project\sdr\src\dds_synthesizer.vhd" type="vhdl"/>
+        <File path="C:\Users\marco\Documents\fpga_project\sdr\src\downsampler.vhd" type="vhdl"/>
+        <File path="C:\Users\marco\Documents\fpga_project\sdr\src\firfilter.vhd" type="vhdl"/>
+        <File path="C:\Users\marco\Documents\fpga_project\sdr\src\fm_demodulator.vhd" type="vhdl"/>
+        <File path="C:\Users\marco\Documents\fpga_project\sdr\src\main.vhd" type="vhdl"/>
+        <File path="C:\Users\marco\Documents\fpga_project\sdr\src\sine_lut_12_x_8.vhd" type="vhdl"/>
+    </FileList>
+    <OptionList>
+        <Option type="disable_insert_pad" value="0"/>
+        <Option type="dsp_balance" value="0"/>
+        <Option type="looplimit" value="2000"/>
+        <Option type="output_file" value="C:\Users\marco\Documents\fpga_project\sdr\impl\gwsynthesis\sdr.vg"/>
+        <Option type="print_all_synthesis_warning" value="1"/>
+        <Option type="ram_rw_check" value="1"/>
+        <Option type="verilog_language" value="verilog-2001"/>
+        <Option type="vhdl_language" value="vhdl-1993"/>
+    </OptionList>
+</Project>

@@ -1,0 +1,12 @@
+//Copyright (C)2014-2022 Gowin Semiconductor Corporation.
+//All rights reserved. 
+//File Title: Physical Constraints file
+//GOWIN Version: 1.9.8.09 Education
+//Part Number: GW1NR-LV9QN88PC6/I5
+//Device: GW1NR-9C
+//Created Time: Sun 12 25 21:15:17 2022
+
+IO_LOC "reset" 3;
+IO_PORT "reset" PULL_MODE=UP;
+IO_LOC "clk_main" 52;
+IO_PORT "clk_main" IO_TYPE=LVCMOS33 PULL_MODE=UP;
