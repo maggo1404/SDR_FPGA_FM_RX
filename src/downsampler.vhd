@@ -62,7 +62,7 @@ begin
   end process;
 
   ---- Output logic
-  output <= output_tmp;
+  --output <= output_tmp;
   --process(output_valid, clk)
   --begin
     --if output_valid = '1' then
