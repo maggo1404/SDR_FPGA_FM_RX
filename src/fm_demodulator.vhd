@@ -37,8 +37,8 @@ end FM_demod;
 
 architecture behavior of FM_demod is
     signal i, q : integer range 0 to 255; -- in-phase and quadrature-phase signals
-    signal carrier : integer range 0 to 65535; -- carrier signal
-    signal demod_sig : integer range 0 to 65535; -- demodulated signal
+    signal carrier : integer range 0 to 131072;--65535; -- carrier signal
+    signal demod_sig : integer range 0 to 33554431; --65535; -- demodulated signal
 begin
     -- split IQ input into in-phase and quadrature-phase signals
     i <= to_integer(unsigned(i_in));
@@ -56,7 +56,7 @@ begin
     process(clk)
     begin
         if rising_edge(clk) then
-            demod_sig <= i * carrier + q * carrier;
+            demod_sig <= (i * carrier) + (q * carrier);
         end if;
     end process;
 

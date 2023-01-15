@@ -58,6 +58,7 @@ process(clock, reset)
 begin
     if (reset = '1') then
         data_sum <= (others => '0');
+        data_out <= (others => '0');
         for i in 0 to 276 loop
             history(i) <= (others => '0');
         end loop;

@@ -45,12 +45,13 @@ begin
     if rising_edge(clk) then
       if reset = '1' then
         counter <= (others => '0');
+        output <= (others => '0');
         output_valid <= '0';
       else
         counter <= counter + 1;
         if counter = 83 then
           counter <= (others => '0');
-          output_tmp <= input;
+          output <= input;
           output_valid <= '1';
         end if;
         if counter = 42 then
