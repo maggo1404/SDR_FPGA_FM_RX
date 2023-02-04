@@ -22,6 +22,7 @@ use work.sine_lut_pkg.all;
 use work.FIR_filter_pkg.all;
 use work.downsampler_pkg.all;
 use work.FM_demod_pkg.all;
+use work.UART_pkg.all;
 
 -- Mixer with local oscillator entity
 entity SDR_Main is
@@ -37,10 +38,11 @@ entity SDR_Main is
            --adc_i : in  STD_LOGIC_VECTOR(7 downto 0);
            --adc_q : in  STD_LOGIC_VECTOR(7 downto 0);
            --oscillator_freq : in  STD_LOGIC_VECTOR(15 downto 0);
-           data_out : out  STD_LOGIC_VECTOR(7 downto 0)
+           --data_out : out  STD_LOGIC_VECTOR(7 downto 0);
            --out_q : out  STD_LOGIC_VECTOR(15 downto 0);
            --out_i : out  STD_LOGIC_VECTOR(15 downto 0)
-           
+           uart_out_pin : out STD_LOGIC;
+           uart_in_pin : in STD_LOGIC
     );
 
 end SDR_Main;
@@ -60,6 +62,7 @@ architecture Behavioral of SDR_MAIN is
     signal down_i : std_logic_vector(15 downto 0);
     signal down_q : std_logic_vector(15 downto 0);
     signal down_valide : std_logic;
+    signal fm_audio : std_logic_vector(7 downto 0);
 
 --   signal clk,rst : std_logic := '0';
     signal ftw : std_logic_vector(ftw_width-1 downto 0);
@@ -156,9 +159,36 @@ begin
     port map(
         i_in => down_i(15 downto 8),
         q_in => down_q(15 downto 8),
-        clk => clk_main,
-        demod_out => data_out
+        clk => down_valide,
+        demod_out => fm_audio--data_out
       );
+
+    uart_i: entity work.UART
+    port map (
+        CLK          => clk_main,
+        RST          => reset,
+        -- UART INTERFACE
+        UART_TXD     => uart_out_pin,
+        UART_RXD     => uart_in_pin, --UART_RXD,
+        -- USER DATA INPUT INTERFACE
+        DATA_IN         => fm_audio, --data_out, --data,
+        DATA_SEND      => down_valide, --valid,
+        BUSY       => open,
+        -- USER DATA OUTPUT INTERFACE
+        DATA_OUT         => open,--data,
+        DATA_VLD     => open,--valid,
+        FRAME_ERROR  => open
+        --PARITY_ERROR => open
+        --DATA_IN     : in  std_logic_vector(7 downto 0);
+        --DATA_SEND   : in  std_logic; -- when DATA_SEND = 1, data on DATA_IN will be transmit, DATA_SEND can set to 1 only when BUSY = 0
+        --BUSY        : out std_logic; -- when BUSY = 1 transiever is busy, you must not set DATA_SEND to 1
+        -- USER DATA OUTPUT INTERFACE
+        --DATA_OUT    : out std_logic_vector(7 downto 0);
+        --DATA_VLD    : out std_logic; -- when DATA_VLD = 1, data on DATA_OUT are valid
+        --FRAME_ERROR : out std_logic  -- when FRAME_ERROR = 1, stop bit was invalid, current and next data may be invalid
+
+    );
+
 
 -- f=ftw_i/2^ftw_width*fclk
 -- ftwi = (f * 2^ftw_width) / fclk

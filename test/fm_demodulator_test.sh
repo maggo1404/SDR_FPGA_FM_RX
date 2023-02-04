@@ -1,6 +1,7 @@
 #!/bin/bash
 begin=$(date +%s)
 # echo "Start bei $begin"
+ghdl -a ../src/sine_lut_12_x_8.vhd
 ghdl -a ../src/fm_demodulator.vhd
 ghdl -a ../src/fm_demodulator_tb.vhd 
 ghdl -e fm_demod_tb
