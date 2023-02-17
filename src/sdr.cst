@@ -10,3 +10,19 @@ IO_LOC "reset" 3;
 IO_PORT "reset" PULL_MODE=UP;
 IO_LOC "clk_main" 52;
 IO_PORT "clk_main" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC "led_pin[5]" 16;
+IO_PORT "led_pin[5]" PULL_MODE=UP DRIVE=8;
+IO_LOC "led_pin[4]" 15;
+IO_PORT "led_pin[4]" PULL_MODE=UP DRIVE=8;
+IO_LOC "led_pin[3]" 14;
+IO_PORT "led_pin[3]" PULL_MODE=UP DRIVE=8;
+IO_LOC "led_pin[2]" 13;
+IO_PORT "led_pin[2]" PULL_MODE=UP DRIVE=8;
+IO_LOC "led_pin[1]" 11;
+IO_PORT "led_pin[1]" PULL_MODE=UP DRIVE=8;
+IO_LOC "led_pin[0]" 10;
+IO_PORT "led_pin[0]" PULL_MODE=UP DRIVE=8;
+
+IO_LOC "uart_out_pin" 18;
+IO_PORT "uart_out_pin" IO_TYPE=LVCMOS33;
