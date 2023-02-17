@@ -39,6 +39,7 @@ entity SDR_Main is
            --adc_q : in  STD_LOGIC_VECTOR(7 downto 0);
            --oscillator_freq : in  STD_LOGIC_VECTOR(15 downto 0);
            --data_out : out  STD_LOGIC_VECTOR(7 downto 0);
+           led_pin : out  STD_LOGIC_VECTOR(5 downto 0);
            --out_q : out  STD_LOGIC_VECTOR(15 downto 0);
            --out_i : out  STD_LOGIC_VECTOR(15 downto 0)
            uart_out_pin : out STD_LOGIC;
@@ -189,6 +190,13 @@ begin
 
     );
 
+    process (down_valide)
+    begin
+        --if ampl_nf'event then
+        led_pin <= fm_audio(5 downto 0);
+        --led_pin <= conv_std_logic_vector(21,6);
+        --end if;
+    end process;
 
 -- f=ftw_i/2^ftw_width*fclk
 -- ftwi = (f * 2^ftw_width) / fclk
