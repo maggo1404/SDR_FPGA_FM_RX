@@ -2,14 +2,54 @@
 <GAO_CONFIG>
     <Version>3.0</Version>
     <Mode>Standard</Mode>
-    <AoCore index="0" sample_clock="clk_main" trig_type="0" storage_depth="1024" window_num="1" capture_amount="1024" trigger_pos="0" module_name="SDR_Main" force_trigger_by_falling_edge="false">
+    <AoCore index="0" sample_clock="clk_data" trig_type="1" storage_depth="4096" window_num="1" capture_amount="1024" trigger_pos="0" module_name="SDR_Main" force_trigger_by_falling_edge="false">
         <SignalList>
-            <Signal>led_pin[0]</Signal>
+            <Signal>clk_data</Signal>
+            <Bus name="down_i_t[7:0]">
+                <Signal>down_i_t[7]</Signal>
+                <Signal>down_i_t[6]</Signal>
+                <Signal>down_i_t[5]</Signal>
+                <Signal>down_i_t[4]</Signal>
+                <Signal>down_i_t[3]</Signal>
+                <Signal>down_i_t[2]</Signal>
+                <Signal>down_i_t[1]</Signal>
+                <Signal>down_i_t[0]</Signal>
+            </Bus>
+            <Bus name="down_q_t[7:0]">
+                <Signal>down_q_t[7]</Signal>
+                <Signal>down_q_t[6]</Signal>
+                <Signal>down_q_t[5]</Signal>
+                <Signal>down_q_t[4]</Signal>
+                <Signal>down_q_t[3]</Signal>
+                <Signal>down_q_t[2]</Signal>
+                <Signal>down_q_t[1]</Signal>
+                <Signal>down_q_t[0]</Signal>
+            </Bus>
+            <Bus name="FMdemod/carrier[7:0]">
+                <Signal>FMdemod/carrier[7]</Signal>
+                <Signal>FMdemod/carrier[6]</Signal>
+                <Signal>FMdemod/carrier[5]</Signal>
+                <Signal>FMdemod/carrier[4]</Signal>
+                <Signal>FMdemod/carrier[3]</Signal>
+                <Signal>FMdemod/carrier[2]</Signal>
+                <Signal>FMdemod/carrier[1]</Signal>
+                <Signal>FMdemod/carrier[0]</Signal>
+            </Bus>
+            <Bus name="fm_audio[7:0]">
+                <Signal>fm_audio[7]</Signal>
+                <Signal>fm_audio[6]</Signal>
+                <Signal>fm_audio[5]</Signal>
+                <Signal>fm_audio[4]</Signal>
+                <Signal>fm_audio[3]</Signal>
+                <Signal>fm_audio[2]</Signal>
+                <Signal>fm_audio[1]</Signal>
+                <Signal>fm_audio[0]</Signal>
+            </Bus>
         </SignalList>
         <Triggers>
             <Trigger index="0">
                 <SignalList>
-                    <Signal>led_pin[0]</Signal>
+                    <Signal>VCC</Signal>
                 </SignalList>
             </Trigger>
             <Trigger index="1"/>
@@ -29,7 +69,7 @@
             <Trigger index="15"/>
         </Triggers>
         <MatchUnits>
-            <MatchUnit index="0" enabled="1" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="0" value1="0" trigger="0"/>
+            <MatchUnit index="0" enabled="1" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="1" value1="0" trigger="0"/>
             <MatchUnit index="1" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
             <MatchUnit index="2" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
             <MatchUnit index="3" enabled="0" match_type="0" counter_enable="0" counter_width="2" counter="2" countinuous="0" func="0" value0="" value1=""/>
@@ -50,5 +90,5 @@
             <Expression>M0</Expression>
         </Expressions>
     </AoCore>
-    <GAO_ID>0100011110000001</GAO_ID>
+    <GAO_ID>1001110000010110</GAO_ID>
 </GAO_CONFIG>

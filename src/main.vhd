@@ -1,18 +1,3 @@
--- Testbench of DDS Frequency Synthesizer
---
--- Copyright (C) 2009 Martin Kumm
--- 
--- This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License
--- as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
--- 
--- This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
--- warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
--- 
--- You should have received a copy of the GNU General Public License along with this program; 
--- if not, see <http://www.gnu.org/licenses/>.
-
--- Package Definition
-
 library ieee;
 use ieee.std_logic_1164.all;
 use IEEE.STD_LOGIC_arith.all;
@@ -34,7 +19,7 @@ entity SDR_Main is
         --PARITY_BIT : string  := "none"  -- legal values: "none", "even", "odd", "mark", "space"
    );
     Port ( clk_main : in  STD_LOGIC;
-           reset : in  STD_LOGIC;
+           reset_inv : in  STD_LOGIC;
            --adc_i : in  STD_LOGIC_VECTOR(7 downto 0);
            --adc_q : in  STD_LOGIC_VECTOR(7 downto 0);
            --oscillator_freq : in  STD_LOGIC_VECTOR(15 downto 0);
@@ -57,23 +42,31 @@ architecture Behavioral of SDR_MAIN is
     signal adc_i : std_logic_vector(7 downto 0);
     signal adc_q : std_logic_vector(7 downto 0);
     signal mixer_i : std_logic_vector(15 downto 0);
+    attribute syn_dspstyle:string;
+    attribute syn_dspstyle of mixer_i:signal is "logic";
     signal mixer_q : std_logic_vector(15 downto 0);
     signal filtered_i : std_logic_vector(15 downto 0);
     signal filtered_q : std_logic_vector(15 downto 0);
     signal down_i : std_logic_vector(15 downto 0);
     signal down_q : std_logic_vector(15 downto 0);
+    signal down_i_t : std_logic_vector(7 downto 0);
+    signal down_q_t : std_logic_vector(7 downto 0);
     signal down_valide : std_logic;
+    signal down_valide_last : std_logic;
     signal fm_audio : std_logic_vector(7 downto 0);
+    signal reset : STD_LOGIC;
+    signal clk_data : STD_LOGIC;
+    signal rx_data : std_logic_vector(7 downto 0);
+    signal rx_data_vld : std_logic;
+    signal rx_temp_clk : std_logic;
+    
 
 --   signal clk,rst : std_logic := '0';
     signal ftw : std_logic_vector(ftw_width-1 downto 0);
-    signal ftw_nf : std_logic_vector(ftw_width-1 downto 0);
-    signal ftw_hf : std_logic_vector(ftw_width-1 downto 0);
-    signal init_phase : std_logic_vector(phase_width-1 downto 0);
-    signal init_phase90 : std_logic_vector(phase_width-1 downto 0);
 --    signal phase_out : std_logic_vector(phase_width-1 downto 0);
     signal ampl_out : std_logic_vector(ampl_width-1 downto 0);
-    signal ampl_nf : std_logic_vector(ampl_width-1 downto 0);
+    signal init_phase : std_logic_vector(phase_width-1 downto 0);
+    signal ftw_hf : std_logic_vector(ftw_width-1 downto 0);
 
 begin
 
@@ -82,49 +75,16 @@ begin
 		ftw_width   => ftw_width
   )
   port map(
-		clk_i => clk_main,
+		clk_i => clk_data,
 		rst_i => reset,
 		ftw_i    => ftw,
 		phase_i  => init_phase,
 		ampl_o => ampl_out
   );
-	dds_synth_nf: dds_synthesizer
-  generic map(
-		ftw_width   => ftw_width
-  )
-  port map(
-		clk_i => clk_main,
-		rst_i => reset,
-		ftw_i    => ftw_nf,
-		phase_i  => init_phase,
-		ampl_o => ampl_nf
-  );
-	dds_synth_hf: dds_synthesizer
-  generic map(
-		ftw_width   => ftw_width
-  )
-  port map(
-		clk_i => clk_main,
-		rst_i => reset,
-		ftw_i    => ftw_hf,
-		phase_i  => init_phase,
-		ampl_o => adc_i
-  );
-    dds_synth_hf90: dds_synthesizer
-  generic map(
-		ftw_width   => ftw_width
-  )
-  port map(
-		clk_i => clk_main,
-		rst_i => reset,
-		ftw_i    => ftw_hf,
-		phase_i  => init_phase90,
-		ampl_o => adc_q
-  );
 
     filter_i: FIR_filter
     port map(
-        clock => clk_main,
+        clock => clk_data,
         reset => reset,
         data_in => mixer_i,
         data_out => filtered_i
@@ -132,7 +92,7 @@ begin
 
     filter_q: FIR_filter
     port map(
-        clock => clk_main,
+        clock => clk_data,
         reset => reset,
         data_in => mixer_q,
         data_out => filtered_q
@@ -140,7 +100,7 @@ begin
 
     downsampler_i: downsampler
     port map(
-        clk => clk_main,
+        clk => clk_data,
         reset => reset,
         input => filtered_i,
         output => down_i,
@@ -149,7 +109,7 @@ begin
 
     downsampler_q: downsampler
     port map(
-        clk => clk_main,
+        clk => clk_data,
         reset => reset,
         input => filtered_q,
         output => down_q
@@ -158,10 +118,13 @@ begin
 
     FMdemod: FM_demod
     port map(
-        i_in => down_i(15 downto 8),
-        q_in => down_q(15 downto 8),
-        clk => down_valide,
-        demod_out => fm_audio--data_out
+        i_i => down_i_t,
+        i_q => down_q_t,
+--        i_in => down_i(15 downto 8),
+--        q_in => down_q(15 downto 8),
+        i_clk => clk_data, --down_valide,
+        o_audio => fm_audio,--data_out
+        i_reset => reset
       );
 
     uart_i: entity work.UART
@@ -174,10 +137,12 @@ begin
         -- USER DATA INPUT INTERFACE
         DATA_IN         => fm_audio, --data_out, --data,
         DATA_SEND      => down_valide, --valid,
+        --DATA_IN         => rx_data, --data_out, --data,
+        --DATA_SEND      => rx_data_vld, --valid,
         BUSY       => open,
         -- USER DATA OUTPUT INTERFACE
-        DATA_OUT         => open,--data,
-        DATA_VLD     => open,--valid,
+        DATA_OUT         => rx_data,--data,
+        DATA_VLD     => rx_data_vld,--valid,
         FRAME_ERROR  => open
         --PARITY_ERROR => open
         --DATA_IN     : in  std_logic_vector(7 downto 0);
@@ -190,35 +155,47 @@ begin
 
     );
 
-    process (down_valide)
-    begin
-        --if ampl_nf'event then
-        led_pin <= fm_audio(5 downto 0);
-        --led_pin <= conv_std_logic_vector(21,6);
-        --end if;
-    end process;
+    --process (down_valide, fm_audio)
+    --begin
+    --    led_pin <= fm_audio(5 downto 0);
+    --end process;
+    --process (clk_main)
+    --begin
+    --    led_pin <= ampl_out(ampl_width - 1 downto ampl_width - 6);
+    --end process;
+
 
 -- f=ftw_i/2^ftw_width*fclk
--- ftwi = (f * 2^ftw_width) / fclk
+-- ftwi = (f * 2^ftw_width) / fclk 
 -- soll 200khz 
 -- ist 199999.996461 khz
-	ftw <= conv_std_logic_vector(31814572,ftw_width);  --20us period @ 100MHz, ftw_width=32
-    ftw_nf <= conv_std_logic_vector(318145,ftw_width); --2khz
-
+	--ftw <= conv_std_logic_vector(31814572,ftw_width);  --20us period @ 27MHz, ftw_width=32
+    --ftw <= conv_std_logic_vector(318,ftw_width);  --2hz period @ 27MHz, ftw_width=32
+    --ftw <= conv_std_logic_vector(751619276,ftw_width);  --350khz period @ 2MHz, ftw_width=32, ist 349999,99962747097015380859375
+    ftw <= conv_std_logic_vector(429496729,ftw_width);  --200khz period @ 2MHz, ftw_width=32, ist 349999,99962747097015380859375
     init_phase <= (others => '0');
-    init_phase90 <= conv_std_logic_vector(1024,phase_width);
 
-    process (ampl_nf)
+    process (rx_data_vld)
     begin
-        --if ampl_nf'event then
-        ftw_hf <= (ampl_nf * conv_std_logic_vector(3106,8)) + conv_std_logic_vector(31019208,ftw_width);
-        --end if;
+        if rx_data_vld'event and rx_data_vld = '1' then
+            if clk_data = '0' then
+                --down_i_t <= rx_data;
+                --down_i_t <= std_logic_vector(resize(signed(rx_data), down_i_t'length));
+                down_i_t <= rx_data;
+                clk_data <= '1';
+            else 
+                --down_q_t <= rx_data;
+                --down_q_t <= std_logic_vector(resize(signed(rx_data), down_q_t'length));
+                down_q_t <= rx_data;
+                clk_data <= '0';
+            end if;
+            
+        end if;
     end process;
-    
-        
-    process (clk_main)
+
+    process (clk_data)
     begin
-        if clk_main'event and clk_main = '1' then
+        if clk_data'event and clk_data = '1' then
             mixer_i <= adc_i * ampl_out;
             mixer_q <= adc_q * ampl_out;
 
@@ -226,6 +203,12 @@ begin
             --out_i <= down_q;
         end if;
     end process;
+    
+    process(reset_inv)
+    begin
+        reset <= not reset_inv;
+    end process;
+
 end Behavioral;
 
 

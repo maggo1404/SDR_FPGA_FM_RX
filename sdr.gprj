@@ -10,9 +10,12 @@
         <File path="src/comp/uart_tx.vhd" type="file.vhdl" enable="1"/>
         <File path="src/dds_synthesizer.vhd" type="file.vhdl" enable="1"/>
         <File path="src/downsampler.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/fifo_hs/fifo_hs.vhd" type="file.vhdl" enable="1"/>
         <File path="src/firfilter.vhd" type="file.vhdl" enable="1"/>
-        <File path="src/fm_demodulator.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/fm_demodulator.vhd" type="file.vhdl" enable="0"/>
+        <File path="src/fm_demodultator_v2.vhd" type="file.vhdl" enable="1"/>
         <File path="src/main.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/main_aussortiert.vhd" type="file.vhdl" enable="0"/>
         <File path="src/mixer.vhd" type="file.vhdl" enable="0"/>
         <File path="src/sine_lut_10_x_8.vhd" type="file.vhdl" enable="0"/>
         <File path="src/sine_lut_12_x_8.vhd" type="file.vhdl" enable="1"/>
@@ -22,6 +25,7 @@
         <File path="src/uart.vhd" type="file.vhdl" enable="1"/>
         <File path="src/sdr.cst" type="file.cst" enable="1"/>
         <File path="src/sdr.sdc" type="file.sdc" enable="1"/>
-        <File path="src/sdr.gao" type="file.gao" enable="1"/>
+        <File path="src/sdr.gao" type="file.gao" enable="0"/>
+        <File path="src/sdr.gsc" type="file.gsc" enable="1"/>
     </FileList>
 </Project>
